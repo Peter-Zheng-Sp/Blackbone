@@ -416,9 +416,11 @@ call_result_t<ModuleDataPtr> ProcessModules::Inject( const std::wstring& path, T
         return modName.status;
 
     // Write dll name into target process
-    auto fillDllName = [&modName, &path]( auto& ustr )
+    auto fillDllName = [&modName, &path](auto& ustr)
     {
-        ustr.Buffer = modName->ptr<std::decay_t<decltype(ustr)>::type>() + sizeof( ustr );
+        using UstrDecayType = std::decay_t<decltype(ustr)>::type;
+        
+        ustr.Buffer = modName->ptr<UstrDecayType>() + sizeof( ustr );
         ustr.MaximumLength = ustr.Length = static_cast<USHORT>(path.size() * sizeof( wchar_t ));
 
         modName->Write( 0, ustr );
@@ -435,7 +437,7 @@ call_result_t<ModuleDataPtr> ProcessModules::Inject( const std::wstring& path, T
     else if (img.mType() == mt_mod64)
     {
         _UNICODE_STRING64 ustr = { 0 };
-        ustrSize = fillDllName( ustr );      
+        ustrSize = fillDllName( ustr );
     }
     else
         return STATUS_INVALID_IMAGE_FORMAT;

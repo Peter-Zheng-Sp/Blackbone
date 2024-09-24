@@ -22,6 +22,7 @@
 
 #include <Windows.h>
 #include <cstddef>
+#include <string>
 #include "internal.h"
 #include "wow64ext.h"
 #include "CMemPtr.h"
@@ -339,7 +340,7 @@ DWORD64 getNTDLL64()
     if (0 != ntdll64)
         return ntdll64;
 
-    ntdll64 = GetModuleHandle64(L"ntdll.dll");
+    ntdll64 = GetModuleHandle64(std::wstring(L"ntdll.dll").data());
     return ntdll64;
 }
 
@@ -384,7 +385,7 @@ DWORD64 getLdrGetProcedureAddress()
     // lazy search, there is no need to use binsearch for just one function
     for (DWORD i = 0; i < ied.NumberOfFunctions; i++)
     {
-        if (!cmpMem64("LdrGetProcedureAddress", modBase + nameTable[i], sizeof("LdrGetProcedureAddress")))
+        if (!cmpMem64(std::string("LdrGetProcedureAddress").data(), modBase + nameTable[i], sizeof("LdrGetProcedureAddress")))
             continue;
         else
             return modBase + rvaTable[ordTable[i]];
@@ -437,7 +438,7 @@ extern "C" SIZE_T __cdecl VirtualQueryEx64(HANDLE hProcess, DWORD64 lpAddress, M
     static DWORD64 ntqvm = 0;
     if (0 == ntqvm)
     {
-        ntqvm = GetProcAddress64(getNTDLL64(), "NtQueryVirtualMemory");
+        ntqvm = GetProcAddress64(getNTDLL64(), std::string("NtQueryVirtualMemory").data());
         if (0 == ntqvm)
             return 0;
     }
@@ -453,7 +454,7 @@ extern "C" DWORD64 __cdecl VirtualAllocEx64(HANDLE hProcess, DWORD64 lpAddress, 
     static DWORD64 ntavm = 0;
     if (0 == ntavm)
     {
-        ntavm = GetProcAddress64(getNTDLL64(), "NtAllocateVirtualMemory");
+        ntavm = GetProcAddress64(getNTDLL64(), std::string("NtAllocateVirtualMemory").data());
         if (0 == ntavm)
             return 0;
     }
@@ -475,7 +476,7 @@ extern "C" BOOL __cdecl VirtualFreeEx64(HANDLE hProcess, DWORD64 lpAddress, SIZE
     static DWORD64 ntfvm = 0;
     if (0 == ntfvm)
     {
-        ntfvm = GetProcAddress64(getNTDLL64(), "NtFreeVirtualMemory");
+        ntfvm = GetProcAddress64(getNTDLL64(), std::string("NtFreeVirtualMemory").data());
         if (0 == ntfvm)
             return 0;
     }
@@ -497,7 +498,7 @@ extern "C" BOOL __cdecl VirtualProtectEx64(HANDLE hProcess, DWORD64 lpAddress, S
     static DWORD64 ntpvm = 0;
     if (0 == ntpvm)
     {
-        ntpvm = GetProcAddress64(getNTDLL64(), "NtProtectVirtualMemory");
+        ntpvm = GetProcAddress64(getNTDLL64(), std::string("NtProtectVirtualMemory").data());
         if (0 == ntpvm)
             return 0;
     }
@@ -519,7 +520,7 @@ extern "C" BOOL __cdecl ReadProcessMemory64(HANDLE hProcess, DWORD64 lpBaseAddre
     static DWORD64 nrvm = 0;
     if (0 == nrvm)
     {
-        nrvm = GetProcAddress64(getNTDLL64(), "NtReadVirtualMemory");
+        nrvm = GetProcAddress64(getNTDLL64(), std::string("NtReadVirtualMemory").data());
         if (0 == nrvm)
             return 0;
     }
@@ -543,7 +544,7 @@ extern "C" BOOL __cdecl WriteProcessMemory64(HANDLE hProcess, DWORD64 lpBaseAddr
     static DWORD64 nrvm = 0;
     if (0 == nrvm)
     {
-        nrvm = GetProcAddress64(getNTDLL64(), "NtWriteVirtualMemory");
+        nrvm = GetProcAddress64(getNTDLL64(), std::string("NtWriteVirtualMemory").data());
         if (0 == nrvm)
             return 0;
     }
@@ -567,7 +568,7 @@ extern "C" BOOL __cdecl GetThreadContext64(HANDLE hThread, _CONTEXT64_2* lpConte
     static DWORD64 gtc = 0;
     if (0 == gtc)
     {
-        gtc = GetProcAddress64(getNTDLL64(), "NtGetContextThread");
+        gtc = GetProcAddress64(getNTDLL64(), std::string("NtGetContextThread").data());
         if (0 == gtc)
             return 0;
     }
@@ -586,7 +587,7 @@ extern "C" BOOL __cdecl SetThreadContext64(HANDLE hThread, _CONTEXT64_2* lpConte
     static DWORD64 stc = 0;
     if (0 == stc)
     {
-        stc = GetProcAddress64(getNTDLL64(), "NtSetContextThread");
+        stc = GetProcAddress64(getNTDLL64(), std::string("NtSetContextThread").data());
         if (0 == stc)
             return 0;
     }

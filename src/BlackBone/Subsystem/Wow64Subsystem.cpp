@@ -27,7 +27,7 @@ NativeWow64::~NativeWow64()
 NTSTATUS NativeWow64::VirtualAllocExT( ptr_t& lpAddress, size_t dwSize, DWORD flAllocationType, DWORD flProtect )
 {
     DWORD64 size64 = dwSize;
-    static ptr_t ntavm = GetProcAddress64( getNTDLL64(), "NtAllocateVirtualMemory" );
+    static ptr_t ntavm = GetProcAddress64( getNTDLL64(), std::string("NtAllocateVirtualMemory").data());
     if (ntavm == 0)
         return STATUS_ORDINAL_NOT_FOUND;
 
@@ -43,7 +43,7 @@ NTSTATUS NativeWow64::VirtualAllocExT( ptr_t& lpAddress, size_t dwSize, DWORD fl
 /// <returns>Status code</returns>
 NTSTATUS NativeWow64::VirtualFreeExT( ptr_t lpAddress, size_t dwSize, DWORD dwFreeType )
 {
-    static ptr_t ntfvm = GetProcAddress64( getNTDLL64(), "NtFreeVirtualMemory" );
+    static ptr_t ntfvm = GetProcAddress64( getNTDLL64(), std::string("NtFreeVirtualMemory").data() );
     if (ntfvm == 0)
         return STATUS_ORDINAL_NOT_FOUND;
 
@@ -61,7 +61,7 @@ NTSTATUS NativeWow64::VirtualFreeExT( ptr_t lpAddress, size_t dwSize, DWORD dwFr
 /// <returns>Status code</returns>
 NTSTATUS NativeWow64::VirtualQueryExT( ptr_t lpAddress, PMEMORY_BASIC_INFORMATION64 lpBuffer )
 {
-    static ptr_t ntqvm = GetProcAddress64( getNTDLL64(), "NtQueryVirtualMemory" );
+    static ptr_t ntqvm = GetProcAddress64( getNTDLL64(), std::string("NtQueryVirtualMemory").data() );
     if (ntqvm == 0)
         return STATUS_ORDINAL_NOT_FOUND;
 
@@ -76,7 +76,7 @@ NTSTATUS NativeWow64::VirtualQueryExT( ptr_t lpAddress, PMEMORY_BASIC_INFORMATIO
 /// <returns>Status code</returns>
 NTSTATUS NativeWow64::VirtualQueryExT( ptr_t lpAddress, MEMORY_INFORMATION_CLASS infoClass, LPVOID lpBuffer, size_t bufSize )
 {
-    static ptr_t ntqvm = GetProcAddress64( getNTDLL64(), "NtQueryVirtualMemory" );
+    static ptr_t ntqvm = GetProcAddress64( getNTDLL64(), std::string("NtQueryVirtualMemory").data() );
     if (ntqvm == 0)
         return STATUS_ORDINAL_NOT_FOUND;
 
@@ -93,7 +93,7 @@ NTSTATUS NativeWow64::VirtualQueryExT( ptr_t lpAddress, MEMORY_INFORMATION_CLASS
 /// <returns>Status code</returns>
 NTSTATUS NativeWow64::VirtualProtectExT( ptr_t lpAddress, DWORD64 dwSize, DWORD flProtect, DWORD* flOld )
 {
-    static ptr_t ntpvm = GetProcAddress64( getNTDLL64(), "NtProtectVirtualMemory" );
+    static ptr_t ntpvm = GetProcAddress64( getNTDLL64(), std::string("NtProtectVirtualMemory").data() );
     if (ntpvm == 0)
         return STATUS_ORDINAL_NOT_FOUND;
 
@@ -173,7 +173,7 @@ NTSTATUS NativeWow64::QueryProcessInfoT( PROCESSINFOCLASS infoClass, LPVOID lpBu
 /// <returns>Status code</returns>
 NTSTATUS NativeWow64::SetProcessInfoT( PROCESSINFOCLASS infoClass, LPVOID lpBuffer, uint32_t bufSize )
 {
-    static ptr_t ntspi = GetProcAddress64( getNTDLL64(), "NtSetInformationProcess" );
+    static ptr_t ntspi = GetProcAddress64( getNTDLL64(), std::string("NtSetInformationProcess").data() );
     if (ntspi == 0)
         return STATUS_ORDINAL_NOT_FOUND;
 
@@ -197,7 +197,7 @@ NTSTATUS NativeWow64::CreateRemoteThreadT( HANDLE& hThread, ptr_t entry, ptr_t a
     }
     else*/
     {
-        static DWORD64 NtCreateThreadEx = GetProcAddress64( getNTDLL64(), "NtCreateThreadEx" );
+        static DWORD64 NtCreateThreadEx = GetProcAddress64( getNTDLL64(), std::string("NtCreateThreadEx").data() );
         if (NtCreateThreadEx == 0)
             return STATUS_ORDINAL_NOT_FOUND;
 
@@ -245,7 +245,7 @@ NTSTATUS NativeWow64::GetThreadContextT( HANDLE hThread, _CONTEXT32& ctx )
 /// <returns>Status code</returns>
 NTSTATUS NativeWow64::GetThreadContextT( HANDLE hThread, _CONTEXT64& ctx )
 {
-    static ptr_t gtc = GetProcAddress64( getNTDLL64(), "NtGetContextThread" );
+    static ptr_t gtc = GetProcAddress64( getNTDLL64(), std::string("NtGetContextThread").data() );
     if (gtc == 0)
         return STATUS_ORDINAL_NOT_FOUND;
 
@@ -280,7 +280,7 @@ NTSTATUS NativeWow64::SetThreadContextT( HANDLE hThread, _CONTEXT32& ctx )
 /// <returns>Status code</returns>
 NTSTATUS NativeWow64::SetThreadContextT( HANDLE hThread, _CONTEXT64& ctx )
 {
-    static ptr_t stc = GetProcAddress64( getNTDLL64(), "NtSetContextThread" );
+    static ptr_t stc = GetProcAddress64( getNTDLL64(), std::string("NtSetContextThread").data() );
     if (stc == 0)
         return STATUS_ORDINAL_NOT_FOUND;
 
@@ -299,7 +299,7 @@ NTSTATUS NativeWow64::QueueApcT( HANDLE hThread, ptr_t func, ptr_t arg )
     if (_wowBarrier.targetWow64)
         return Native::QueueApcT( hThread, func, arg );
 
-    static ptr_t qat = GetProcAddress64( getNTDLL64(), "NtQueueApcThread" );
+    static ptr_t qat = GetProcAddress64( getNTDLL64(), std::string("NtQueueApcThread").data() );
     if (qat == 0)
         return STATUS_ORDINAL_NOT_FOUND;
 
@@ -381,7 +381,7 @@ ptr_t NativeWow64::getTEB( HANDLE hThread, _TEB64* pteb )
     _THREAD_BASIC_INFORMATION_T<DWORD64> info = { 0 };
     ULONG bytes = 0;
 
-    static ptr_t ntQit = GetProcAddress64( getNTDLL64(), "NtQueryInformationThread" );
+    static ptr_t ntQit = GetProcAddress64( getNTDLL64(), std::string("NtQueryInformationThread").data() );
 
     if (ntQit == 0)
     {
