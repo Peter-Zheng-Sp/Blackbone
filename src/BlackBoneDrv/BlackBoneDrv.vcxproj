@@ -44,6 +44,7 @@
   </PropertyGroup>
   <PropertyGroup Label="Globals">
     <ProjectName>BlackBoneDrv</ProjectName>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Label="PropertySheets">
     <ConfigurationType>Driver</ConfigurationType>
@@ -56,14 +57,15 @@
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
     <DriverTargetPlatform>Desktop</DriverTargetPlatform>
     <SupportsPackaging>false</SupportsPackaging>
+    <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win10Debug|x64'" Label="Configuration">
-    <TargetVersion>
-    </TargetVersion>
+    <TargetVersion>Windows10</TargetVersion>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
     <DriverTargetPlatform>Desktop</DriverTargetPlatform>
     <SupportsPackaging>false</SupportsPackaging>
+    <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win8 Debug|x64'" Label="Configuration">
     <TargetVersion>Windows8</TargetVersion>
@@ -71,6 +73,7 @@
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
     <DriverTargetPlatform>Desktop</DriverTargetPlatform>
     <SupportsPackaging>false</SupportsPackaging>
+    <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
   </PropertyGroup>
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Win8.1 Release|x64'">
     <TargetVersion>WindowsV6.3</TargetVersion>
@@ -78,14 +81,15 @@
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
     <DriverTargetPlatform>Desktop</DriverTargetPlatform>
     <SupportsPackaging>false</SupportsPackaging>
+    <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win10Release|x64'" Label="Configuration">
-    <TargetVersion>
-    </TargetVersion>
+    <TargetVersion>Windows10</TargetVersion>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
     <DriverTargetPlatform>Desktop</DriverTargetPlatform>
     <SupportsPackaging>false</SupportsPackaging>
+    <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win8 Release|x64'" Label="Configuration">
     <TargetVersion>Windows8</TargetVersion>
@@ -93,6 +97,7 @@
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
     <DriverTargetPlatform>Desktop</DriverTargetPlatform>
     <SupportsPackaging>false</SupportsPackaging>
+    <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win7 Debug|x64'" Label="Configuration">
     <TargetVersion>Windows7</TargetVersion>
@@ -100,6 +105,9 @@
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
     <DriverTargetPlatform>Desktop</DriverTargetPlatform>
     <SupportsPackaging>false</SupportsPackaging>
+    <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
+    <_NT_TARGET_VERSION>
+    </_NT_TARGET_VERSION>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win7 Release|x64'" Label="Configuration">
     <TargetVersion>Windows7</TargetVersion>
@@ -107,6 +115,7 @@
     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
     <DriverTargetPlatform>Desktop</DriverTargetPlatform>
     <SupportsPackaging>false</SupportsPackaging>
+    <Driver_SpectreMitigation>false</Driver_SpectreMitigation>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -167,6 +176,8 @@
       </AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN81_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
@@ -183,6 +194,9 @@
       </AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN10_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DisableSpecificWarnings>4748;4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
@@ -191,12 +205,17 @@
       <Command>
       </Command>
     </PostBuildEvent>
+    <DriverSign>
+      <FileDigestAlgorithm>SHA1</FileDigestAlgorithm>
+    </DriverSign>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win8 Debug|x64'">
     <ClCompile>
       <CompileAs>CompileAsC</CompileAs>
       <AdditionalIncludeDirectories />
       <PreprocessorDefinitions>_WIN8_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <PostBuildEvent>
       <Command>
@@ -218,6 +237,8 @@
       <SDLCheck>true</SDLCheck>
       <AdditionalIncludeDirectories />
       <PreprocessorDefinitions>_WIN7_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <PostBuildEvent>
       <Command>
@@ -232,6 +253,8 @@
       <CompileAs>CompileAsC</CompileAs>
       <AdditionalIncludeDirectories />
       <PreprocessorDefinitions>_WIN7_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <PostBuildEvent>
       <Command>
@@ -247,6 +270,8 @@
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN81_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
@@ -258,16 +283,24 @@
       <AdditionalIncludeDirectories>
       </AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN10_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
+      <DisableSpecificWarnings>4603;4627;4986;4987;4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
     </Link>
+    <DriverSign>
+      <FileDigestAlgorithm>SHA1</FileDigestAlgorithm>
+    </DriverSign>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win8 Release|x64'">
     <ClCompile>
       <CompileAs>CompileAsC</CompileAs>
       <AdditionalIncludeDirectories />
       <PreprocessorDefinitions>_WIN8_;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>Level3</WarningLevel>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <PostBuildEvent>
       <Command>
