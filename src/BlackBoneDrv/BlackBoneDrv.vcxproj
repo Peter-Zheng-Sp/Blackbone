@@ -131,43 +131,43 @@
     <OutDir>$(SolutionDir)bin\$(Platform)\$(ConfigurationName)\</OutDir>
     <TimeStampServer>http://timestamp.verisign.com/scripts/timstamp.dll</TimeStampServer>
     <IntDir>$(SolutionDir)obj\$(Platform)\$(ConfigurationName)\</IntDir>
-    <TargetName>$(TargetName)81</TargetName>
+    <TargetName>BabyDrv81</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win10Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(ConfigurationName)\</OutDir>
     <TimeStampServer>http://timestamp.verisign.com/scripts/timstamp.dll</TimeStampServer>
     <IntDir>$(SolutionDir)obj\$(Platform)\$(ConfigurationName)\</IntDir>
-    <TargetName>$(TargetName)10</TargetName>
+    <TargetName>BabyDrv10</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win8 Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(ConfigurationName)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Platform)\$(ConfigurationName)\</IntDir>
-    <TargetName>$(TargetName)8</TargetName>
+    <TargetName>BabyDrv8</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win7 Debug|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(ConfigurationName)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Platform)\$(ConfigurationName)\</IntDir>
-    <TargetName>$(TargetName)7</TargetName>
+    <TargetName>BabyDrv7</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win7 Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(ConfigurationName)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Platform)\$(ConfigurationName)\</IntDir>
-    <TargetName>$(TargetName)7</TargetName>
+    <TargetName>BabyDrv7</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win8.1 Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(ConfigurationName)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Platform)\$(ConfigurationName)\</IntDir>
-    <TargetName>$(TargetName)81</TargetName>
+    <TargetName>BabyDrv81</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win10Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(ConfigurationName)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Platform)\$(ConfigurationName)\</IntDir>
-    <TargetName>$(TargetName)10</TargetName>
+    <TargetName>BabyDrv10</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Win8 Release|x64'">
     <OutDir>$(SolutionDir)bin\$(Platform)\$(ConfigurationName)\</OutDir>
     <IntDir>$(SolutionDir)obj\$(Platform)\$(ConfigurationName)\</IntDir>
-    <TargetName>$(TargetName)8</TargetName>
+    <TargetName>BabyDrv8</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Win8.1 Debug|x64'">
     <ClCompile>

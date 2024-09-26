@@ -8,7 +8,7 @@
 namespace blackbone
 {
 
-#define DRIVER_SVC_NAME L"BlackBone"
+#define DRIVER_SVC_NAME L"Baby"
 
 DriverControl::DriverControl()
 {
