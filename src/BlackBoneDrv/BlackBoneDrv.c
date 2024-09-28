@@ -35,7 +35,7 @@ NTSTATUS DriverEntry( IN PDRIVER_OBJECT DriverObject, IN PUNICODE_STRING Registr
     if (!NT_SUCCESS( status ))
     {
         if (status == STATUS_NOT_SUPPORTED)
-            DPRINT( "BlackBone: %s: Unsupported OS version. Aborting\n", __FUNCTION__ );
+            DPRINT( "Unsupported OS version. Aborting\n" );
 
         return status;
     }
@@ -56,7 +56,7 @@ NTSTATUS DriverEntry( IN PDRIVER_OBJECT DriverObject, IN PUNICODE_STRING Registr
     status = PsSetCreateProcessNotifyRoutine( BBProcessNotify, FALSE );
     if (!NT_SUCCESS( status ))
     {
-        DPRINT( "BlackBone: %s: Failed to setup notify routine with staus 0x%X\n", __FUNCTION__, status );
+        DPRINT( "Failed to setup notify routine with staus 0x%X\n", status );
         return status;
     }
 
@@ -65,7 +65,7 @@ NTSTATUS DriverEntry( IN PDRIVER_OBJECT DriverObject, IN PUNICODE_STRING Registr
     status = IoCreateDevice( DriverObject, 0, &deviceName, FILE_DEVICE_BLACKBONE, 0, FALSE, &deviceObject );
     if (!NT_SUCCESS( status ))
     {
-        DPRINT( "BlackBone: %s: IoCreateDevice failed with status 0x%X\n", __FUNCTION__, status );
+        DPRINT( "IoCreateDevice failed with status 0x%X\n", status );
         PsSetCreateProcessNotifyRoutine(BBProcessNotify, TRUE);
         return status;
     }
@@ -81,7 +81,7 @@ NTSTATUS DriverEntry( IN PDRIVER_OBJECT DriverObject, IN PUNICODE_STRING Registr
 
     if (!NT_SUCCESS( status ))
     {
-        DPRINT( "BlackBone: %s: IoCreateSymbolicLink failed with status 0x%X\n", __FUNCTION__, status );
+        DPRINT( "IoCreateSymbolicLink failed with status 0x%X\n", status );
         IoDeleteDevice (deviceObject);
         PsSetCreateProcessNotifyRoutine(BBProcessNotify, TRUE);
     }
@@ -225,7 +225,7 @@ NTSTATUS BBGetBuildNO( OUT PULONG pBuildNo )
         ZwClose( hKey );
     }
     else
-        DPRINT( "BlackBone: %s: ZwOpenKey failed with status 0x%X\n", __FUNCTION__, status );
+        DPRINT( "ZwOpenKey failed with status 0x%X\n", status );
 
     return status;
 
@@ -276,7 +276,7 @@ NTSTATUS BBInitDynamicData( IN OUT PDYNAMIC_DATA pData )
 #endif
 
         DPRINT( 
-            "BlackBone: OS version %d.%d.%d.%d.%d - 0x%x\n",
+            "OS version %d.%d.%d.%d.%d - 0x%x\n",
             verInfo.dwMajorVersion,
             verInfo.dwMinorVersion,
             verInfo.dwBuildNumber,
@@ -579,7 +579,7 @@ NTSTATUS BBInitDynamicData( IN OUT PDYNAMIC_DATA pData )
             pData->correctBuild = TRUE;
 
         DPRINT( 
-            "BlackBone: Dynamic search status: SSDT - %s, ExRemoveTable - %s\n",
+            "Dynamic search status: SSDT - %s, ExRemoveTable - %s\n",
             GetSSDTBase() != NULL ? "SUCCESS" : "FAIL",
             pData->ExRemoveTable != 0 ? "SUCCESS" : "FAIL" 
             );
@@ -587,8 +587,7 @@ NTSTATUS BBInitDynamicData( IN OUT PDYNAMIC_DATA pData )
         if (pData->ver >= WINVER_10_RS1)
         {
             DPRINT( 
-                "BlackBone: %s: g_KdBlock->KernBase: %p, GetKernelBase() = 0x%p \n", 
-                __FUNCTION__, g_KdBlock.KernBase, GetKernelBase( NULL ) 
+                "g_KdBlock->KernBase: %p, GetKernelBase() = 0x%p \n", g_KdBlock.KernBase, GetKernelBase( NULL ) 
                 );
 
             ULONGLONG mask = (1ll << (PHYSICAL_ADDRESS_BITS - 1)) - 1;
@@ -596,10 +595,10 @@ NTSTATUS BBInitDynamicData( IN OUT PDYNAMIC_DATA pData )
             dynData.DYN_PDE_BASE = (ULONG_PTR)((g_KdBlock.PteBase & ~mask) | ((g_KdBlock.PteBase >> 9) & mask));
         }
 
-        DPRINT( "BlackBone: PDE_BASE: %p, PTE_BASE: %p\n", pData->DYN_PDE_BASE, pData->DYN_PTE_BASE );
+        DPRINT( "PDE_BASE: %p, PTE_BASE: %p\n", pData->DYN_PDE_BASE, pData->DYN_PTE_BASE );
         if (pData->DYN_PDE_BASE < MI_SYSTEM_RANGE_START || pData->DYN_PTE_BASE < MI_SYSTEM_RANGE_START)
         {
-            DPRINT( "BlackBone: Invalid PDE/PTE base, aborting\n" );
+            DPRINT( "Invalid PDE/PTE base, aborting\n" );
             return STATUS_UNSUCCESSFUL;
         }
         

@@ -149,7 +149,7 @@ PVOID GetKernelBase( OUT PULONG pSize )
     status = ZwQuerySystemInformation( SystemModuleInformation, 0, bytes, &bytes );
     if (bytes == 0)
     {
-        DPRINT( "BlackBone: %s: Invalid SystemModuleInformation size\n", __FUNCTION__ );
+        DPRINT( "Invalid SystemModuleInformation size\n" );
         return NULL;
     }
 
@@ -218,7 +218,7 @@ PSYSTEM_SERVICE_DESCRIPTOR_TABLE GetSSDTBase()
             if (NT_SUCCESS( status ))
             {
                 g_SSDT = (PSYSTEM_SERVICE_DESCRIPTOR_TABLE)((PUCHAR)pFound + *(PULONG)((PUCHAR)pFound + 3) + 7);
-                //DPRINT( "BlackBone: %s: KeSystemServiceDescriptorTable = 0x%p\n", __FUNCTION__, g_SSDT );
+                //DPRINT( "KeSystemServiceDescriptorTable = 0x%p\n", g_SSDT );
                 return g_SSDT;
             }
         }
@@ -438,19 +438,19 @@ NTSTATUS AllocateInDiscardedMemory( IN ULONG size, OUT PVOID* ppFoundBase )
                 // Already allocated
                 if (MI_IS_PHYSICAL_ADDRESS( VA ))
                 {
-                    //DPRINT( "BlackBone: %s: VA 0x%p is already backed by PFN: 0x%p\n", __FUNCTION__, VA, pPTE->u.Hard.PageFrameNumber );
+                    //DPRINT( "VA 0x%p is already backed by PFN: 0x%p\n", VA, pPTE->u.Hard.PageFrameNumber );
                     continue;
                 }
 
                 PFN_NUMBER pfn = MiAllocateDriverPage( pPTE );
                 if (pfn == 0)
                 {
-                    DPRINT( "BlackBone: %s: Failed to allocate physical page for PTE 0x%p\n", __FUNCTION__, pPTE );
+                    DPRINT( "Failed to allocate physical page for PTE 0x%p\n", pPTE );
                     return STATUS_NO_MEMORY;
                 }
                 else
                 {
-                    //DPRINT( "BlackBone: %s: VA 0x%p now backed by PFN: 0x%p; PTE: 0x%p\n", __FUNCTION__, VA, pfn, pPTE );
+                    //DPRINT( "VA 0x%p now backed by PFN: 0x%p; PTE: 0x%p\n", VA, pfn, pPTE );
                     TempPTE.u.Hard.PageFrameNumber = pfn;
                     *pPTE = TempPTE;
                 }

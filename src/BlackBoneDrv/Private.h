@@ -3,12 +3,12 @@
 #include "Imports.h"
 
 //#ifdef DBG
-#define DPRINT(format, ...) DbgPrintEx(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL, format, __VA_ARGS__)
+#define DPRINT(format, ...) DbgPrintEx(DPFLTR_IHVDRIVER_ID, DPFLTR_ERROR_LEVEL, "BabyDrv - %s(%d): " ## format, __FUNCTION__, __LINE__, __VA_ARGS__)
 //#else
 //#define DPRINT(...)
 //#endif
 
-#define BB_POOL_TAG 'enoB'
+#define BB_POOL_TAG 'USBB'
 
 
 #define ObpAccessProtectCloseBit 0x2000000

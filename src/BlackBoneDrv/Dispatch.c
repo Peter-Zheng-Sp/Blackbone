@@ -269,7 +269,7 @@ NTSTATUS BBDispatch( IN PDEVICE_OBJECT DeviceObject, IN PIRP Irp )
                     break; 
 
                 default:
-                    DPRINT( "BlackBone: %s: Unknown IRP_MJ_DEVICE_CONTROL 0x%X\n", __FUNCTION__, ioControlCode );
+                    DPRINT( "Unknown IRP_MJ_DEVICE_CONTROL 0x%X\n", ioControlCode );
                     Irp->IoStatus.Status = STATUS_INVALID_PARAMETER;
                     break;
             }
