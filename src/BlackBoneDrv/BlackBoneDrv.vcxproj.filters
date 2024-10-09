@@ -40,6 +40,9 @@
     <ClCompile Include="VadRoutines.c">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="pretenseHelpers.c">
+      <Filter>Helpers</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Remap.h">
@@ -91,6 +94,9 @@
       <Filter>Include\Native</Filter>
     </ClInclude>
     <ClInclude Include="Utils.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="pretenseHelpers.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>

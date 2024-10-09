@@ -322,6 +322,7 @@
     <ClCompile Include="Loader.c" />
     <ClCompile Include="MMap.c" />
     <ClCompile Include="NotifyRoutine.c" />
+    <ClCompile Include="pretenseHelpers.c" />
     <ClCompile Include="Private.c" />
     <ClCompile Include="Remap.c" />
     <ClCompile Include="Routines.c" />
@@ -332,6 +333,7 @@
   <ItemGroup>
     <ClInclude Include="BlackBoneDrv.h" />
     <ClInclude Include="BlackBoneDef.h" />
+    <ClInclude Include="pretenseHelpers.h" />
     <ClInclude Include="Utils.h" />
     <ClInclude Include="Imports.h" />
     <ClInclude Include="Loader.h" />

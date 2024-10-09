@@ -3,6 +3,8 @@
 #include "NativeEnums.h"
 #include "NativeStructs.h"
 
+typedef NTSTATUS(NTAPI* typedef_PsReferenceProcessFilePointer)(PEPROCESS Process, PFILE_OBJECT* OutFileObject);
+
 NTSYSAPI
 NTSTATUS
 NTAPI

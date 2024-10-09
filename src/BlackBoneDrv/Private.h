@@ -198,6 +198,9 @@ typedef struct _DYNAMIC_DATA
     ULONG ExitStatus;       // ETHREAD::ExitStatus
     ULONG MiAllocPage;      // MiAllocateDriverPage offset
     ULONG ExRemoveTable;    // Ex(p)RemoveHandleTable offset
+    ULONG ImageFileName;    // UCHAR ImageFileName[15]
+    ULONG SeAuditImageName; // SeAuditProcessCreationInfo
+    ULONG UserTokenGroups;  // TOKEN::UserAndGroups
 
     ULONG_PTR DYN_PDE_BASE; // Win10 AU+ relocated PDE base VA
     ULONG_PTR DYN_PTE_BASE; // Win10 AU+ relocated PTE base VA
